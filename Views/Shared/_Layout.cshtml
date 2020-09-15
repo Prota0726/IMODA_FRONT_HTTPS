@@ -1,0 +1,421 @@
+﻿<!DOCTYPE html>
+
+@using IMODA_FRONT_HTTPS.ViewModels
+
+@{
+    var product_class = IMODA_FRONT_HTTPS.ViewModels.IndexViewModel.product_class_data();
+    var product_class1 = IMODA_FRONT_HTTPS.ViewModels.IndexViewModel.product_class_data1();
+    var product_class2 = IMODA_FRONT_HTTPS.ViewModels.IndexViewModel.product_class_data2();
+    var banner_top = IMODA_FRONT_HTTPS.ViewModels.IndexViewModel.banner_top();
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @*<meta charset="utf-8" />*@
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    <title>IMODA</title>
+    <link rel="shortcut icon" href="~/public/images/ico.ico" />
+    <meta name="description" content="เทรนด์แฟชั่นเมืองนอก สไตล์เกาหลี ญี่ปุ่น ไต้หวัน อัพเดททุกสัปดาห์ พร้อมส่งและรับของภายใน 7 วัน">
+    <meta name="keywords" content="imoda, thailand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="R_4nf3CtTJvD8JM6wTY_gZqvfDSUKqydFweSlK5kfMo" />
+
+    <!-- bootstrap start -->
+    <link href="~/public/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="~/public/js/bootstrap.js"></script>
+    <!-- bootstrap end -->
+    <link href="~/public/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/public/css/jquery.mmenu.all.css" rel="stylesheet" type="text/css" />
+    <link href="~/public/css/jquery.mmenu.toggles.css" rel="stylesheet" type="text/css" />
+    <script src="~/public/js/jquery.mmenu.min.all.js"></script>
+    <script src="~/public/js/jquery.mmenu.toggles.js"></script>
+    <script src="~/public/js/imoda.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148987226-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-148987226-1');
+    </script>
+
+
+
+</head>
+<body>
+    <!-- NavBar start -->
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header" style="height:50px;">
+                <a class="menuiconbar" href="#mnav"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                <button id="closemenu"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <button data-toggle="collapse-side" data-target-sidebar=".side-collapse-right" data-target-content=".side-collapse-container-right" type="button" class="navbar-toggle pull-rihgt" style="margin-top:-12px;">
+                    <i class="fa fa-user" aria-hidden="true" style="font-size:18px; transform:translateY(20px); color:#888;"></i>
+                </button>
+                <a class="navbar-brand pchidden" href="~/Home/Index"><img src="~/public/images/logo-white.png" width="180" /></a>
+            </div>
+
+            <div id="snav" class="navbar-inverse side-collapse-right in">
+                <nav role="navigation" class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right navstyle">
+                        <li><a href="~/Home/qna">Q&A </a></li>
+                        <li><a href="~/Home/login">บัญชีของฉัน</a></li>
+
+
+                        @if (Session["username"] != null)
+                        {
+                            <li><a href="#">@Session["username"]</a></li>
+                        }
+                        <li>
+                            <a href="~/Home/cart1">
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span id="pdt_count">
+                                    CART(
+                                    @{
+                                        string temp = null;
+                                        if (Response.Cookies["'pdt_count"].Value == null)
+                                        {
+                                            temp = "0";
+                                        }
+                                        else
+                                        {
+                                            temp = Response.Cookies["'pdt_count"].Value;
+                                        }
+                                        @Html.Raw(temp);
+                                    }
+                                    
+                                    )
+                                </span>
+                            </a>
+                        </li>
+                        @{
+                            if (Session["username"] != null)
+                            {
+                                <li>
+                                    <a href="~/Home/cart1">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <span id="pdt_count">
+                                            เกวียน
+                                            (
+                                            @{
+                                                if (Session["pdt_count"] == null)
+                                                {
+                                                    <text>0</text>
+                                                }
+                                                else
+                                                {
+                                                    <text>@HttpContext.Current.Request.Cookies["pdt_count"].Value</text>
+                                                }
+                                            }
+                                            )
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        @{
+                            if (Session["member_id"] != null)
+                            {
+                                <li><a href="~/Home/logout">ออกจากระบบ</a></li>
+                            }
+                        }
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="LanguageSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="LanguageSelect">
+                                <a class="dropdown-item" href="~/en/index">English</a>
+                                <a class="dropdown-item active" href="~/Home/index">ไทย</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="navbar-inverse side-collapse-left in pchidden">
+                <nav id="mnav" role="navigation" class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left navstyle" style="margin-top: 10px; border-top: 1px solid #101010; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);">
+                        @{
+                            foreach (var item in product_class)
+                            {
+                                <li>
+                                    <a href="~/Home/product/@item.id">@item.name</a>
+                                    <ul>
+                                        @foreach (var item1 in product_class1)
+                                        {
+                                            <li>
+                                                <a href="~/Home/product1/@item1.id">@item1.name</a>
+                                                <ul>
+                                                    @foreach (var item2 in product_class2)
+                                                    {
+                                                        <li><a href="~/Home/product2/@item2.id">@item2.name</a></li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NavBar end -->
+
+    <div class="clearfix"></div>
+
+    <div class="contenthead col-md-12 phhidden" style="padding-top:50px; background-color:#fff;">
+        <div class="col-md-12">
+            <a href="~/Home/index"><img src="~/public/images/logo.jpg" style="display:block; margin:auto;" onClick="location.href=~/Home/index" style="cursor: pointer;" /></a>
+            <div id="searchdiv" class="col-md-12">
+                <form method="GET" action="~/Home/search">
+                    <input id="searchinput" name="p_id" class="form-control" type="text" />
+                    <button class="search_enter1" type="submit" onClick="location.href='search.html'"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12" style="text-align:center;">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav pcnav">
+
+                        @foreach (var item in product_class)
+                        {
+                            if (item.@switch != 0)
+                            {
+                                <li><a href="~/Home/product/@item.id">@item.name</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="content col-md-12 nopadding">
+
+        <div class="col-md-12 nopadding" style="margin-top:5px;">
+
+            @foreach (var item in banner_top)
+            {
+                <a href="@item.url" target="@item.action"><img src="~/public/banner/@item.img" width="100%" /></a>
+            }
+        </div>
+    </div>
+    <div class="content col-md-12 nopadding">
+        @RenderBody()
+        <footer class="footerinbox" style="background-color:#fff; color:#222; margin-top:20px;">
+            <div class="container" style="padding-top:25px; padding-bottom:40px;">
+                <div class="col-md-12 footerhead">
+                    <div class="col-md-3 col-sm-6 col-xs-6 box" onclick="location.href='#'">
+                        <a href="https://www.facebook.com/imodathailand/"><img src="~/public/images/fb-gray.png" width="50" /><h4>Facebook</h4></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 box" onclick="location.href='#'">
+                        <a href="https://www.instagram.com/imoda_thailand/"><img src="~/public/images/instagram-gray.png" width="50" /><h4>Instagram</h4></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 box" onclick="location.href='#'">
+                        <a href="#" data-toggle="modal" data-target="#onlineserver"><img src="~/public/images/online-gray.png" width="50" /><h4>Online customer service</h4></a>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 box" onclick="location.href='#'">
+                        <img src="~/public/images/shop-gray.png" width="50" /><h4>Contact us</h4>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 foselbox">
+                    <h4 style="font-size: 18px; line-height: 26px; font-family: Arial,sans-serif; font-weight: bold;">IMODA</h4>
+                    <ul class="footerlist">
+                        <li><a href="~/Home/about"><img src="~/public/images/im-1.png" width="25" />About IMODA</a></li>
+                        <li><a href="~/Home/news"><img src="~/public/images/news-1.png" width="25" />News</a></li>
+                        <li><a href="~/Home/membership"><img src="~/public/images/membership-1.png" width="25" />Membership</a></li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 foselbox">
+                    <h4 style="font-size: 18px; line-height: 26px; font-family: Arial,sans-serif; font-weight: bold;">HELP</h4>
+                    <ul class="footerlist">
+                        <li><a href="#" data-toggle="modal" data-target="#onlineserver"><img src="~/public/images/online-1.png" width="25" />Online customer service</a></li>
+                        <li><a href="~/Home/qna"><img src="~/public/images/purchase-1.png" width="25" />Purchase Information</a></li>
+                        <li><a href="~/Home/sizemeasure"><img src="~/public/images/size-1.png" width="25" />Size measurement method</a></li>
+                        <li><a href="~/Home/qna"><img src="~/public/images/q&a-1.png" width="25" />Q&A </a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 foselbox">
+                    <h4 style="font-size: 18px; line-height: 26px; font-family: Arial,sans-serif; font-weight: bold;">FOLLOW IMODA</h4>
+                    <ul class="footerlist">
+                        <li><a href="https://www.facebook.com/imodathailand/"><img src="~/public/images/fb-gray.png" width="25" />Facebook</a></li>
+                        <li><a href="https://www.facebook.com/messages/t/imodathailand"><img src="~/public/images/messenger-gray.png" width="25" />Messenger</a></li>
+                        <li><a href="https://www.instagram.com/imoda_thailand/"><img src="~/public/images/instagram-gray.png" width="25" />Instagram</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-md-12" style="text-align:center; color:#888;">
+                <ul class="socialbtn">
+                    <li><img src="~/public/images/1 payment-2c2p.png" width="50" /></li>
+                    <li><img src="~/public/images/2 payment-visa.png" width="50" /></li>
+                    <li><img src="~/public/images/3 payment-master.png" width="50" /></li>
+                    <li><img src="~/public/images/4 payment-lotus.png" width="50" /></li>
+                    <li><img src="~/public/images/5 payment-bigc.png" width="50" /></li>
+                    <li><img src="~/public/images/6 payment-fam.png" width="50" /></li>
+                    <li><img src="~/public/images/7 payment-paypost.png" width="50" /></li>
+                    <li><img src="~/public/images/8 payment-true.png" width="50" /></li>
+                    <li><img src="~/public/images/9 payment-cenpay.png" width="50" /></li>
+                    <li><img src="~/public/images/10 payment-mpay.png" width="50" /></li>
+                </ul>
+                <h6>Copyright © IMODA (Thailand) Co., Ltd. All Rights Reserved.</h6>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!---------------- gotop ---------------->
+        <span class="scrolltotop"><i class="fa fa-chevron-up"></i></span>
+        <!---------------- gotop ---------------->
+        <!-- 客服中心 Modal -->
+        <div id="onlineserver" class="w3-modal" style="z-index:9999;">
+            <div class="w3-modal-content w3-animate-zoom w3-card-4">
+                <header class="w3-container w3-teal">
+                    <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Online Customer Service</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </header>
+                <div class="w3-container scrollbar" id="style-3">
+                    <div class="force-overflow"></div>
+                    <div class="col-md-12" style="text-align:left; line-height:30px !important;">
+                        <p style="font-size:13px;">
+                            <Span style="font-size:16px;">[Customer Service Center Description]</Span><br />
+                            We provide "return service" and no replacement process is provided. Please correct orders for the correct products directly, save the time spent sending back and forth, and avoid waiting for out of stock. If you want to apply for a return, you can refer directly to "7-11 Return Application Process" and "Facilitate Dakang Return Application Process" . You do not need to wait for customer service reply and you can apply for a return online immediately. Other details, please refer to the return, refund Frequently Asked Questions<br />
+                            If you need to modify your order or purchase additional items after checkout, log in to “Order Inquiry” to cancel the order, and then re-order. The customer service personnel has not modified the order's permission. If the order has entered the packaging operation, the order cannot be canceled. (Remind you that if you cancel your order and order it again, the product inventory should be based on the current page!)<br />
+                            Other shopping questions can be sent to the [shopping information] before querying for various related issues. If you still can't find the answer, please enter the question below to send it out. If you have many orders, please also provide your questions when you ask questions. Order number, customer service staff will reply as soon as possible.<br />
+                            [Customer Service Hours] Monday to Friday: 10:00 to 12:00 / 13:30 to 18:00. No service is provided for regular holidays and after-hours. Please forgive me! If you send a letter to inquire, we will process the problem in as early as 1~2 days on the working day and notify you by Email that you have answered it, and keep the Q&A record in the account's question and answer center for you to inquire. The customer service staff is not necessary and will not take the initiative to use the phone to contact you! Beware of fraud<br />
+                            The question has been sent and the customer service reply. Please check the period under [Customer Service Record Inquiry] below. ( Customer service records provide information for the last six months only)
+                        </p>
+                        <div id="customer">
+                            <form action="~/Customer/create" method="post" v-show="isLogin">
+                                <table class="orderTable" width="95%" align="center">
+                                    <tr>
+                                        <td>Question time</td>
+                                        <td>Question category</td>
+                                        <td>Subject</td>
+                                        <td>Processing progress</td>
+                                        <td>Watch the details</td>
+                                    </tr>
+                                    <tr v-for="row in question">
+                                        <td>{{ row.time }}</td>
+                                        <td>{{ row.category }}</td>
+                                        <td>{{ row.subject }}</td>
+                                        <td>{{ row.process }}</td>
+                                        <td>{{ row.watch }}</td>
+                                    </tr>
+                                </table>
+                                <div class="clearfix"></div>
+
+                                <table class="onlinetype_table" align="center" style="margin-top:10px;">
+                                    <tr>
+                                        <td><label>category</label></td>
+                                        <td>
+                                            <select name="category" class="form-control">
+                                                <option v-for="row in category" v-bind:value="row.id">{{ row.name }}</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Subject</label></td>
+                                        <td><input type="text" class="form-control" name="subject" required /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Content</label></td>
+                                        <td><textarea class="form-control" rows="10" name="content" required></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><button class="btn btn-primary">Submit</button></td>
+                                    </tr>
+                                </table>
+                            </form>
+                            <div v-show="!isLogin" style="text-align: center;">
+                                <button type="button" class="btn btn-primary btn-lg" v-on:click="redirectLogin">Please Login First</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        var customer = new Vue({
+                            el: '#customer',
+                            data: {
+                                category: [],
+                                question: [],
+                                isLogin: false
+                            },
+                            methods: {
+                                redirectLogin: function () {
+                                    location.href = 'login';
+                                }
+                            }
+                        });
+                        $(document).ready(function () {
+                            login()
+                            function get_category() {
+                                $.ajax({
+                                    url: '/Customer/category',
+                                    type: "get",
+                                    success: function (data) {
+                                        Vue.set(customer, 'category', data);
+                                    }
+                                });
+                            }
+                            function login() {
+                                $.ajax({
+                                    url: "/Customer/islogin",
+                                    type: "GET",
+                                    success: function () {
+                                        Vue.set(customer, 'isLogin', true);
+                                        alert("isLogin true");
+                                        get_category()
+                                        get_question()
+                                    }
+                                });
+                            }
+                            function get_question() {
+                                $.ajax({
+                                    url: '/Customer/get_user_request',
+                                    type: "get",
+                                    success: function (data) {
+                                        Vue.set(customer, 'question', data);
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <script type="text/javascript" src="~/public/js/vue.js"></script>
+            <!--footer class="w3-container w3-teal">
+              <p>Modal Footer</p>
+            </footer-->
+        </div>
+        <!-- 客服中心 Modal -->
+    </div>
+    @*<div class="container body-content">
+            @RenderBody()
+            <hr />
+
+        </div>*@
+
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        var message = @Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+        </script>
+    }
+
+</body>
+
+</html>

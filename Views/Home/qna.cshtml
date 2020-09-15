@@ -1,0 +1,87 @@
+﻿@model IMODA_FRONT_HTTPS.ViewModels.QnaViewModels
+
+@{
+    ViewBag.Title = "qna";
+}
+
+
+<div class="member-center">
+    @*style="display: inline-flex;"*@
+    <div class="col-md-1"></div>
+    <div class="col-md-10" style="margin:30px auto; display:block;">
+        <h3 class="title">Q&A </h3><hr />
+        <div class="col-md-12 nopadding">
+            <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked flex-column QnA_tab">
+
+                    @foreach (var item in Model.question_category_data)
+                    {
+                        if (item.active == 1)
+                        {
+                            <li class="active"><a href="#tab_@item.id" data-toggle="pill">@item.en_title<br /><span>@item.en_content</span></a></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="#tab_@item.id" data-toggle="pill">@item.en_title<br /><span><p>@item.en_content</p></span></a></li>
+
+                        }
+                    }
+
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <div class="tab-content QNA">
+                    @{Random Rng = new Random((int)DateTime.Now.Millisecond); }
+                    @foreach (var item in Model.question_category_data)
+                    {
+
+                        <div class="tab-pane" id="tab_@item.id">
+
+                            <div class="faqHeader">
+                                @item.en_title
+                                <p>
+                                    @item.en_content
+                                </p>
+                            </div>
+
+                            @foreach (var row in Model.question_set_data)
+                            {
+
+
+                                if (item.id == row.extends)
+                                {
+                                    int tag = new int();
+
+
+                                    tag = Rng.Next(10, 2154363);
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#FAQ-@tag">@row.en_title</a>
+                                            </h4>
+                                        </div>
+                                        <div id="FAQ-@tag" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p>@row.en_content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of container -->
+</div>
+
+

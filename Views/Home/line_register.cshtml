@@ -1,0 +1,44 @@
+﻿@model IMODA_FRONT_HTTPS.Models.member
+
+@{
+    ViewBag.Title = "line_register";
+}
+
+<div class="container">
+    <div class="col-md-12 nopadding" style="margin:30px auto;">
+        <div class="container" style="text-align: center;">
+            <h3>JOIN US</h3>
+            <hr />
+
+            <form method="POST" action="line_register">
+
+                <input type="hidden" name="line_id" value="@Request.QueryString["userId"]">
+                <table class="membertable" align="center">
+                    <tr>
+                        <td><label>Name</label></td>
+
+                        <td><input type="text" name="name" class="form-control" value="@Request.QueryString["displayName"]" required /></td>
+                        <td><input type="radio" name="sex" value="0" checked />Female&nbsp;&nbsp;<input type="radio" name="sex" value="1" />Male</td>
+                    </tr>
+                    <tr>
+                        <td><label>Birthday</label></td>
+                        <td colspan="2"><input type="date" name="birthday" class="form-control" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Email</label></td>
+
+                        <td colspan="2"><input name="account" type="email" class="form-control" value="" /><p class="tip">Please use lowercase half type to enter your correct mailbox so as not to receive order letters</p></td>
+                    </tr>
+                    <tr>
+                        <td><label>Phone Number</label></td>
+                        <td colspan="2"><input name="tel" type="tel" class="form-control" required /></td>
+                    </tr>
+                    <tr><td colspan="3"><button class="btn btn-Login">Join</button></td></tr>
+                </table>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>

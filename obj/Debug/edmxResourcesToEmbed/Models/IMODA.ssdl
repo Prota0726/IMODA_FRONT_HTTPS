@@ -1,0 +1,875 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="test1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="about">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="en_content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_content" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="banner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="banner_switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="banner_top" Type="int" Nullable="false" />
+    <Property Name="banner" Type="int" Nullable="false" />
+    <Property Name="center" Type="int" Nullable="false" />
+    <Property Name="under" Type="int" Nullable="false" />
+    <Property Name="img" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="url" Type="nvarchar(max)" />
+    <Property Name="action" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="code">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="total" Type="int" Nullable="false" />
+    <Property Name="num" Type="int" Nullable="false" />
+    <Property Name="end_time" Type="date" Nullable="false" />
+    <Property Name="m_id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'test1.dbo.color_type' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="color_type">
+    <Key>
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="type" Type="int" Nullable="false" />
+    <Property Name="en_name" Type="nvarchar" MaxLength="38" />
+  </EntityType>
+  <EntityType Name="community">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="url" Type="nvarchar" MaxLength="255" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="company">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="txt" Type="nvarchar(max)" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="company_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'test1.dbo.currency' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="currency">
+    <Key>
+      <PropertyRef Name="twd_min" />
+      <PropertyRef Name="twd_max" />
+      <PropertyRef Name="thb" />
+    </Key>
+    <Property Name="twd_min" Type="int" Nullable="false" />
+    <Property Name="twd_max" Type="int" Nullable="false" />
+    <Property Name="thb" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="discount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="fare" Type="int" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="discount_code">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="amount" Type="int" />
+    <Property Name="deduction" Type="int" />
+    <Property Name="start_time" Type="date" />
+    <Property Name="end_time" Type="date" />
+    <Property Name="level" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="email">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="server" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="account" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="m_id" Type="int" Nullable="false" />
+    <Property Name="order_no" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="action" Type="int" Nullable="false" />
+    <Property Name="gold" Type="int" Nullable="false" />
+    <Property Name="start_time" Type="date" Nullable="false" />
+    <Property Name="end_time" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="forgetpassword">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="start_day" Type="date" Nullable="false" />
+    <Property Name="end_time" Type="date" Nullable="false" />
+    <Property Name="member_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="hot_search">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="manger">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="account" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="manger_class" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="account" />
+      <PropertyRef Name="email" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="account" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fb_id" Type="nvarchar" MaxLength="255" />
+    <Property Name="line_id" Type="nvarchar" MaxLength="255" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="sex" Type="int" />
+    <Property Name="tel" Type="nvarchar" MaxLength="10" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="address" Type="nvarchar" MaxLength="255" />
+    <Property Name="level" Type="int" Nullable="false" />
+    <Property Name="level_start_time" Type="datetime" Nullable="false" />
+    <Property Name="level_end_time" Type="datetime" Nullable="false" />
+    <Property Name="discount_code" Type="nvarchar" MaxLength="100" />
+    <Property Name="feedback" Type="int" Nullable="false" />
+    <Property Name="shopping_gold" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="member_level">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="name_" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="sum_" Type="int" Nullable="false" />
+    <Property Name="discount" Type="float" Nullable="false" />
+    <Property Name="icoin" Type="int" Nullable="false" />
+    <Property Name="end_day" Type="int" Nullable="false" />
+    <Property Name="shopping_gold" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="membership">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="en_content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_content" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="news">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="txt" Type="nvarchar(max)" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="news_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ob_order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+    <Property Name="order_no" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ob_OrderNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="OrderAmt" Type="int" Nullable="false" />
+    <Property Name="Shipment" Type="int" Nullable="false" />
+    <Property Name="TotalAmt" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="int" Nullable="false" />
+    <Property Name="Balance" Type="int" Nullable="false" />
+    <Property Name="ErrorMessage" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ob_order_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="ob_order_no" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="p_id" Type="int" Nullable="false" />
+    <Property Name="count" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="olduser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="gender" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="tel" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="lang" Type="int" Nullable="false" />
+    <Property Name="level" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="onsale">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="discount" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order_">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="time_" Type="date" Nullable="false" />
+    <Property Name="m_id" Type="int" Nullable="false" />
+    <Property Name="order_no" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="ob_order_no" Type="nvarchar" MaxLength="16" />
+    <Property Name="total" Type="int" Nullable="false" />
+    <Property Name="fare" Type="int" Nullable="false" />
+    <Property Name="sum_" Type="int" Nullable="false" />
+    <Property Name="discount1" Type="int" Nullable="false" />
+    <Property Name="discount2" Type="int" Nullable="false" />
+    <Property Name="discount3" Type="int" Nullable="false" />
+    <Property Name="name_" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="tel" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="30" />
+    <Property Name="address" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="payment_status" Type="int" Nullable="false" />
+    <Property Name="pay_status" Type="int" Nullable="false" />
+    <Property Name="ship_status" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+    <Property Name="PaymentRefCode" Type="nvarchar" MaxLength="60" />
+    <Property Name="RemittancesNo" Type="nvarchar" MaxLength="60" />
+    <Property Name="country" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="postalCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="state" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order_detail">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="order_no" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="order_no" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="p_id" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="color" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="size" Type="nvarchar" MaxLength="8" Nullable="false" />
+    <Property Name="num" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="permission">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="nav" Type="int" Nullable="false" />
+    <Property Name="item" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'test1.dbo.product' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="p_id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="p_id" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="c_time" Type="datetime" />
+    <Property Name="c_id" Type="int" />
+    <Property Name="u_time" Type="datetime" />
+    <Property Name="u_id" Type="int" />
+    <Property Name="switch" Type="int" />
+    <Property Name="sort" Type="int" />
+    <Property Name="th_name" Type="nvarchar" MaxLength="255" />
+    <Property Name="en_name" Type="nvarchar" MaxLength="255" />
+    <Property Name="ch_name" Type="nvarchar" MaxLength="600" />
+    <Property Name="class" Type="int" />
+    <Property Name="categoryno" Type="int" />
+    <Property Name="categoryid1" Type="nvarchar" MaxLength="255" />
+    <Property Name="categoryid2" Type="nvarchar" MaxLength="255" />
+    <Property Name="producturl" Type="nvarchar" MaxLength="255" />
+    <Property Name="bigimage" Type="nvarchar" MaxLength="255" />
+    <Property Name="smallimage" Type="nvarchar" MaxLength="255" />
+    <Property Name="rectangleimage" Type="nvarchar" MaxLength="255" />
+    <Property Name="price" Type="int" />
+    <Property Name="discountedprice" Type="int" />
+    <Property Name="th_description" Type="nvarchar(max)" />
+    <Property Name="en_description" Type="nvarchar(max)" />
+    <Property Name="ch_description" Type="nvarchar(max)" />
+    <Property Name="descriptionUrl" Type="nvarchar" MaxLength="255" />
+    <Property Name="stock" Type="int" />
+    <Property Name="collocationProduct" Type="nvarchar" MaxLength="255" />
+    <Property Name="sourcingCategory" Type="nvarchar" MaxLength="255" />
+    <Property Name="product_type" Type="nvarchar" MaxLength="255" />
+    <Property Name="season" Type="int" />
+    <Property Name="season1" Type="nvarchar" MaxLength="255" />
+    <Property Name="sizetable" Type="nvarchar" MaxLength="255" />
+    <Property Name="applinks" Type="nvarchar" MaxLength="255" />
+    <Property Name="overseas" Type="nvarchar" MaxLength="255" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+    <Property Name="index_sg" Type="tinyint" />
+    <Property Name="ch_sizetable" Type="nvarchar(max)" />
+    <Property Name="th_sizetable" Type="nvarchar(max)" />
+    <Property Name="en_sizetable" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="product_category">
+    <Key>
+      <PropertyRef Name="product_id" />
+      <PropertyRef Name="class_id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="product_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="class_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="product_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner_url" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner1" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner_url1" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner2" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner_url2" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img_url" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img1" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img_url1" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img2" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img_url2" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img3" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img_url3" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img4" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img_url4" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="banner_action" Type="int" Nullable="false" />
+    <Property Name="img_action" Type="int" Nullable="false" />
+    <Property Name="index_" Type="int" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="product_class1">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="product_class2">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="product_img">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="p_id" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="stock_id" Type="nvarchar" MaxLength="255" />
+    <Property Name="color" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="img" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="province">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="txt" Type="nvarchar(max)" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="question_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="active" Type="int" Nullable="false" />
+    <Property Name="en_title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="en_content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="th_content" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="question_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="question_set">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="extends" Type="int" Nullable="false" />
+    <Property Name="en_title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="en_content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="th_content" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="role_class" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="season">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="service_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="selected" Type="tinyint" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="service_order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="category" Type="int" Nullable="false" />
+    <Property Name="subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="process" Type="int" Nullable="false" />
+    <Property Name="reply" Type="nvarchar(max)" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="create_time" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="shopping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="txt" Type="nvarchar(max)" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="shopping_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="shopping_gold">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="u_time" Type="date" Nullable="false" />
+    <Property Name="m_id" Type="int" Nullable="false" />
+    <Property Name="action" Type="int" Nullable="false" />
+    <Property Name="gold" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sizemeasure">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="en_field1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field4" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field5" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field6" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field7" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="en_field8" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field4" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field5" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field6" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field7" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="th_field8" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stock_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="p_id" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="stock_id" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="color" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="size" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="store">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="class" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="txt" Type="nvarchar(max)" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="store_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="sort" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="remark" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="thai_currency">
+    <Key>
+      <PropertyRef Name="min" />
+    </Key>
+    <Property Name="min" Type="int" Nullable="false" />
+    <Property Name="max" Type="int" />
+    <Property Name="thai" Type="int" />
+  </EntityType>
+  <EntityType Name="video">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="c_time" Type="datetime" Nullable="false" />
+    <Property Name="c_id" Type="int" Nullable="false" />
+    <Property Name="u_time" Type="datetime" Nullable="false" />
+    <Property Name="u_id" Type="int" Nullable="false" />
+    <Property Name="switch" Type="int" Nullable="false" />
+    <Property Name="file_" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="remark" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="test1ModelStoreContainer">
+    <EntitySet Name="about" EntityType="Self.about" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="banner" EntityType="Self.banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="code" EntityType="Self.code" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="community" EntityType="Self.community" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="company" EntityType="Self.company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="company_class" EntityType="Self.company_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="discount" EntityType="Self.discount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="discount_code" EntityType="Self.discount_code" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="email" EntityType="Self.email" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="forgetpassword" EntityType="Self.forgetpassword" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="hot_search" EntityType="Self.hot_search" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="manger" EntityType="Self.manger" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="member_level" EntityType="Self.member_level" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="membership" EntityType="Self.membership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="news_class" EntityType="Self.news_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ob_order" EntityType="Self.ob_order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ob_order_detail" EntityType="Self.ob_order_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="olduser" EntityType="Self.olduser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="onsale" EntityType="Self.onsale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order_" EntityType="Self.order_" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order_detail" EntityType="Self.order_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="permission" EntityType="Self.permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_category" EntityType="Self.product_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_class" EntityType="Self.product_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_class1" EntityType="Self.product_class1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_class2" EntityType="Self.product_class2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_img" EntityType="Self.product_img" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="province" EntityType="Self.province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="question_category" EntityType="Self.question_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="question_class" EntityType="Self.question_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="question_set" EntityType="Self.question_set" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="season" EntityType="Self.season" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service_category" EntityType="Self.service_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="service_order" EntityType="Self.service_order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shopping" EntityType="Self.shopping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shopping_class" EntityType="Self.shopping_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shopping_gold" EntityType="Self.shopping_gold" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sizemeasure" EntityType="Self.sizemeasure" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="stock_detail" EntityType="Self.stock_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="store" EntityType="Self.store" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="store_class" EntityType="Self.store_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="thai_currency" EntityType="Self.thai_currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="video" EntityType="Self.video" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="color_type" EntityType="Self.color_type" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [color_type].[type] AS [type], 
+    [color_type].[en_name] AS [en_name]
+    FROM [dbo].[color_type] AS [color_type]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="currency" EntityType="Self.currency" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [currency].[twd_min] AS [twd_min], 
+    [currency].[twd_max] AS [twd_max], 
+    [currency].[thb] AS [thb]
+    FROM [dbo].[currency] AS [currency]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="product" EntityType="Self.product" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [product].[id] AS [id], 
+    [product].[p_id] AS [p_id], 
+    [product].[c_time] AS [c_time], 
+    [product].[c_id] AS [c_id], 
+    [product].[u_time] AS [u_time], 
+    [product].[u_id] AS [u_id], 
+    [product].[switch] AS [switch], 
+    [product].[sort] AS [sort], 
+    [product].[th_name] AS [th_name], 
+    [product].[en_name] AS [en_name], 
+    [product].[ch_name] AS [ch_name], 
+    [product].[class] AS [class], 
+    [product].[categoryno] AS [categoryno], 
+    [product].[categoryid1] AS [categoryid1], 
+    [product].[categoryid2] AS [categoryid2], 
+    [product].[producturl] AS [producturl], 
+    [product].[bigimage] AS [bigimage], 
+    [product].[smallimage] AS [smallimage], 
+    [product].[rectangleimage] AS [rectangleimage], 
+    [product].[price] AS [price], 
+    [product].[discountedprice] AS [discountedprice], 
+    [product].[th_description] AS [th_description], 
+    [product].[en_description] AS [en_description], 
+    [product].[ch_description] AS [ch_description], 
+    [product].[descriptionUrl] AS [descriptionUrl], 
+    [product].[stock] AS [stock], 
+    [product].[collocationProduct] AS [collocationProduct], 
+    [product].[sourcingCategory] AS [sourcingCategory], 
+    [product].[product_type] AS [product_type], 
+    [product].[season] AS [season], 
+    [product].[season1] AS [season1], 
+    [product].[sizetable] AS [sizetable], 
+    [product].[applinks] AS [applinks], 
+    [product].[overseas] AS [overseas], 
+    [product].[remark] AS [remark], 
+    [product].[index_sg] AS [index_sg], 
+    [product].[ch_sizetable] AS [ch_sizetable], 
+    [product].[th_sizetable] AS [th_sizetable], 
+    [product].[en_sizetable] AS [en_sizetable]
+    FROM [dbo].[product] AS [product]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

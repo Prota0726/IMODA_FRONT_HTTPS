@@ -1,0 +1,764 @@
+﻿
+
+@{
+    ViewBag.Title = "member";
+}
+
+
+<div class="container member-center">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <h3 class="title">
+            Member Center
+        </h3><hr />
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <h4>
+                Member Level
+            </h4>
+            <table class="member_level">
+                <tr>
+                    <td rowspan="2" 
+                     @{
+                            var temp = "class= \"active\"";
+                            
+                            if(Session["level"].ToString() == "1")
+                            {
+                                @Html.Raw(temp)
+                             }
+                     }
+                      >
+                      <br>
+								<br />General<br />membership<br />
+								
+                    
+					  </td>
+                    <td><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i><br /></td>
+                    <td rowspan="2" 
+                        @{                                                       
+                            if(Session["level"].ToString() == "2")
+                            {
+                                @Html.Raw(temp)
+                             }
+                     }
+                      ><br>
+								<br />VIP<br />membership<br />
+							</td>
+                    <td><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i></td>
+                    <td rowspan="2" @{                                                       
+                            if(Session["level"].ToString() == "3")
+                            {
+                                @Html.Raw(temp)
+                             }
+                     }
+                      ><br>
+								<br />VVIP<br />membership<br />
+							</td>
+                </tr>
+                <tr>
+                    <td>
+                        <h6>
+                            <?php
+                            if($_SESSION['level'] === "member") {
+                            echo "shopping more than ฿";
+                            echo $dollor[1]['sum'] - $ordersum[0]['SUM(sum)'];
+                            } ?>
+                            @{
+                                if (Session["level"].ToString() == "1")
+                                {
+                                    temp = "shopping more than ฿";
+                                    @Html.Raw(temp)
+                                }
+                            }
+                        </h6>
+                    </td>
+                    <td>
+                        <h6>
+                            <?php
+                            if($_SESSION['level'] === "member" || $_SESSION['level'] === "vip") {
+                            echo "shopping more than ฿";
+                            echo $dollor[0]['sum'] - $ordersum[0]['SUM(sum)'];
+                            } ?>
+                        </h6>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <div class="panel-group wrap" id="bs-collapse">
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#one">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <?php
+                            if($lang == 'en'){echo str_replace("ข้อมูลส่วนตัว","Member Profile","ข้อมูลส่วนตัว");}
+                            else if($lang == 'th'){echo str_replace("ข้อมูลส่วนตัว","ข้อมูลส่วนตัว","ข้อมูลส่วนตัว");}
+                            ?>
+                        </h4>
+                    </div>
+                </a>
+                <div id="one" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form method="POST" action="<?=base_url($folder.'/member/mod');?>">
+                            <table class="accounttable" align="center">
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("บัญชี","Account","บัญชี");}
+                                        else if($lang == 'th'){echo str_replace("บัญชี","บัญชี","บัญชี");}
+                                        ?>
+                                    </td>
+                                    <td><input class="form-control" type="text" value="<?=$member->account;?>" disabled="disabled" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("ชื่อ","Name","ชื่อ");}
+                                        else if($lang == 'th'){echo str_replace("ชื่อ","ชื่อ","ชื่อ");}
+                                        ?>
+                                    </td>
+                                    <td><input class="form-control" type="text" name="name" value="<?=$member->name;?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันเกิด","Birthday","วันเกิด");}
+                                        else if($lang == 'th'){echo str_replace("วันเกิด","วันเกิด","วันเกิด");}
+                                        ?>
+                                    </td>
+                                    <td><input class="form-control" type="date" name="birthday" value="<?=$member->birthday;?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("โทรศัพท์","Phone","โทรศัพท์");}
+                                        else if($lang == 'th'){echo str_replace("โทรศัพท์","โทรศัพท์","โทรศัพท์");}
+                                        ?>
+                                    </td>
+                                    <td><input class="form-control" type="phone" name="tel" value="<?=$member->tel;?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("อีเมล์","Email","อีเมล์");}
+                                        else if($lang == 'th'){echo str_replace("อีเมล์","อีเมล์","อีเมล์");}
+                                        ?>
+                                    </td>
+                                    <td><input class="form-control" type="email" name="email" value="<?=$member->email;?>" /></td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <button type="submit" class="btn btn-success" style="display:block; margin:auto;">
+                                <?php
+                                if($lang == 'en'){echo str_replace("เสนอ","Confirmation","เสนอ");}
+                                else if($lang == 'th'){echo str_replace("เสนอ","เสนอ","เสนอ");}
+                                ?>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#two">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                            <?php
+                            if($lang == 'en'){echo str_replace("แก้ไข รหัสผ่าน","Edit Password","แก้ไข รหัสผ่าน");}
+                            else if($lang == 'th'){echo str_replace("แก้ไข รหัสผ่าน","แก้ไข รหัสผ่าน","แก้ไข รหัสผ่าน");}
+                            ?>
+                        </h4>
+                    </div>
+                </a>
+                <div id="two" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form method="POST" action="<?=base_url($folder.'/member/modpassword');?>">
+                            <table class="accounttable" align="center">
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("รหัสผ่านการเข้าใช้งาน","Login password","รหัสผ่านการเข้าใช้งาน");}
+                                        else if($lang == 'th'){echo str_replace("รหัสผ่านการเข้าใช้งาน","รหัสผ่านการเข้าใช้งาน","รหัสผ่านการเข้าใช้งาน");}
+                                        ?>
+                                    </td>
+                                    <td><input name="old_password" class="form-control" type="password" pattern="[a-z0-9]{6,12}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("รหัสผ่านใหม่","New password","รหัสผ่านใหม่");}
+                                        else if($lang == 'th'){echo str_replace("รหัสผ่านใหม่","รหัสผ่านใหม่","รหัสผ่านใหม่");}
+                                        ?>
+                                    </td>
+                                    <td><input name="password" class="form-control" type="password" pattern="[a-z0-9]{6,12}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("ยืนยันรหัสผ่าน","Confirm password","ยืนยันรหัสผ่าน");}
+                                        else if($lang == 'th'){echo str_replace("ยืนยันรหัสผ่าน","ยืนยันรหัสผ่าน","ยืนยันรหัสผ่าน");}
+                                        ?>
+                                    </td>
+                                    <td><input name="new_password" class="form-control" type="password" pattern="[a-z0-9]{6,12}" /></td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <button type="submit" class="btn btn-success" style="display:block; margin:auto;">
+                                <?php
+                                if($lang == 'en'){echo str_replace("เสนอ","Confirmation","เสนอ");}
+                                else if($lang == 'th'){echo str_replace("เสนอ","เสนอ","เสนอ");}
+                                ?>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#three" aria-expanded="true">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                            <?php
+                            if($lang == 'en'){echo str_replace("โปรไฟล์บัญชีเกือบ 3 เดือน","Nearly Three Month Account Profile","โปรไฟล์บัญชีเกือบ 3 เดือน");}
+                            else if($lang == 'th'){echo str_replace("โปรไฟล์บัญชีเกือบ 3 เดือน","โปรไฟล์บัญชีเกือบ 3 เดือน","โปรไฟล์บัญชีเกือบ 3 เดือน");}
+                            ?>
+                        </h4>
+                    </div>
+                </a>
+                <div id="three" class="panel-collapse collapse in" aria-expanded="true">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("รอใบสั่งจัดส่ง","Waiting for shipping order","รอใบสั่งจัดส่ง");}
+                                    else if($lang == 'th'){echo str_replace("รอใบสั่งจัดส่ง","รอใบสั่งจัดส่ง","รอใบสั่งจัดส่ง");}
+                                    ?>
+                                    <br />
+                                    <a href="#"><?php echo $wait_shopping_count; ?></a>
+                                </div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ใบสั่งจัดส่ง","Shipping order","ใบสั่งจัดส่ง");}
+                                    else if($lang == 'th'){echo str_replace("ใบสั่งจัดส่ง","ใบสั่งจัดส่ง","ใบสั่งจัดส่ง");}
+                                    ?>
+                                    <br />
+                                    <a href="#"><?php echo $shopping_count; ?></a>
+                                </div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ซองจดหมายสีแดง","Red envelope","ซองจดหมายสีแดง");}
+                                    else if($lang == 'th'){echo str_replace("ซองจดหมายสีแดง","ซองจดหมายสีแดง","ซองจดหมายสีแดง");}
+                                    ?>
+                                    <br />
+                                    <a href="#"><?=$member->discount_num;?></a>
+                                </div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">iCoin<br /><img src="<?=base_url('public/images/icoin.png');?>" width="20" style="margin-top:-8px;" /><a href="#"><?=$member->feedback;?></a></div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box" data-toggle="modal" data-target="#onlineserver">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("บริการลูกค้าออนไลน์","Online customer service","บริการลูกค้าออนไลน์");}
+                                    else if($lang == 'th'){echo str_replace("บริการลูกค้าออนไลน์","บริการลูกค้าออนไลน์","บริการลูกค้าออนไลน์");}
+                                    ?>
+                                    <br />
+                                    <img src="<?=base_url('public/images/online-1.png');?>" width="40" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#four">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-archive" aria-hidden="true"></i>
+                            <?php
+                            if($lang == 'en'){echo str_replace("การติดตามใบสั่งซื้อ","Order Tracking","การติดตามใบสั่งซื้อ");}
+                            else if($lang == 'th'){echo str_replace("การติดตามใบสั่งซื้อ","การติดตามใบสั่งซื้อ","การติดตามใบสั่งซื้อ");}
+                            ?>
+                        </h4>
+                    </div>
+                </a>
+                <div id="four" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <table id="order_table" class="orderTable" width="100%">
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันสั่ง","Order date","วันสั่ง");}
+                                        else if($lang == 'th'){echo str_replace("วันสั่ง","วันสั่ง","วันสั่ง");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("เลขที่ใบสั่งซื้อ","Order number","เลขที่ใบสั่งซื้อ");}
+                                        else if($lang == 'th'){echo str_replace("เลขที่ใบสั่งซื้อ","เลขที่ใบสั่งซื้อ","เลขที่ใบสั่งซื้อ");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("ผู้รับ","Recipient","ผู้รับ");}
+                                        else if($lang == 'th'){echo str_replace("ผู้รับ","ผู้รับ","ผู้รับ");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("จำนวน","Amount","จำนวน");}
+                                        else if($lang == 'th'){echo str_replace("จำนวน","จำนวน","จำนวน");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("เลือกหมายเลขแพคเกจ","Picking package number","เลือกหมายเลขแพคเกจ");}
+                                        else if($lang == 'th'){echo str_replace("เลือกหมายเลขแพคเกจ","เลือกหมายเลขแพคเกจ","เลือกหมายเลขแพคเกจ");}
+                                        ?>
+                                    </td>
+                                    <!--td>
+                                        <?php
+                                            if($lang == 'en'){echo str_replace("สถานะ","State description","สถานะ");}
+                                            else if($lang == 'th'){echo str_replace("สถานะ","สถานะ","สถานะ");}
+                                        ?>
+                                    </td-->
+                                </tr>
+                                <?php foreach($order as $item):?>
+                                <tr>
+                                    <td><?=$item['c_time'];?></td>
+                                    <td><a href="#" onclick="order_detail('<?=$item['order_no'];?>');" data-toggle="modal" data-target="#orderModal"><?=$item['order_no'];?></a></td>
+                                    <td><?=$item['name'];?></td>
+                                    <td><?=$item['sum'];?></td>
+                                    <td><?=$item['trackno'];?></td>
+                                    <!--td><?=$item['ship_status'];?></td-->
+                                </tr>
+                                <?php endforeach;?>
+                            </table>
+                            <!--------取消訂單、退貨申請、退貨進度btn------
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#returnModal">退貨申請</button><button class="btn btn-warning" data-toggle="modal" data-target="#cancelModal">取消訂單</button><button class="btn btn-info" data-toggle="modal" data-target="#processModal">退貨進度</button>
+                            <!-------------->
+
+                            <div class="col-md-12" style="margin:10px auto;">
+                                <input type="date" id="order_start" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <label style="margin:8px; float:left;">~</label>
+                                <input type="date" id="order_end" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <button class="btn btn-primary" style="margin-left:10px; float:left;" onclick="sch_order();">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query History","ประวัติการค้นหา");}
+                                    else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                                    ?>
+                                </button>
+                                <div class="clearfix"></div>
+                                <span class="alert-danger" style="font-size:12px;">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","*date range can only be entered within one month","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    else if($lang == 'th'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#five">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <?php
+                            if($lang == 'en'){echo str_replace("ซองจดหมายสีแดง","Red envelope","ซองจดหมายสีแดง");}
+                            else if($lang == 'th'){echo str_replace("ซองจดหมายสีแดง","ซองจดหมายสีแดง","ซองจดหมายสีแดง");}
+                            ?>
+                        </h4>
+                    </div>
+                </a>
+                <div id="five" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <table id="discount_code_table" class="orderTable" width="100%">
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("สถานะ","Project","สถานะ");}
+                                        else if($lang == 'th'){echo str_replace("สถานะ","สถานะ","สถานะ");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("จำนวน","Amount","จำนวน");}
+                                        else if($lang == 'th'){echo str_replace("จำนวน","จำนวน","จำนวน");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("การหัก","Deduction","การหัก");}
+                                        else if($lang == 'th'){echo str_replace("การหัก","การหัก","การหัก");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันที่เปิดใช้งาน","Activation date","วันที่เปิดใช้งาน");}
+                                        else if($lang == 'th'){echo str_replace("วันที่เปิดใช้งาน","วันที่เปิดใช้งาน","วันที่เปิดใช้งาน");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันที่มีผล","Effective date","วันที่มีผล");}
+                                        else if($lang == 'th'){echo str_replace("วันที่มีผล","วันที่มีผล","วันที่มีผล");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        Status
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("สถานะ","Status","สถานะ");}
+                                        else if($lang == 'th'){echo str_replace("สถานะ","สถานะ","สถานะ");}
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php foreach($discount_code as $item):?>
+                                <tr>
+                                    <td><?=$item['name'];?></td>
+                                    <td><?=$item['amount'];?></td>
+                                    <td><?=$item['deduction'];?></td>
+                                    <td><?=$item['start_time'];?></td>
+                                    <td><?=$item['end_time'];?></td>
+                                    <td><?=$item['status'];?></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </table>
+                            <div class="col-md-12" style="margin:10px auto;">
+                                <input id="discount_code_start" type="date" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <label style="margin:8px; float:left;">~</label>
+                                <input id="discount_code_end" type="date" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <button type="button" class="btn btn-primary" style="margin-left:10px; float:left;" onclick="sch_discount_code();">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query History","ประวัติการค้นหา");}
+                                    else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                                    ?>
+                                </button>
+                                <div class="clearfix"></div>
+                                <span class="alert-danger" style="font-size:12px;">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","*date range can only be entered within one month","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    else if($lang == 'th'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#six">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-diamond" aria-hidden="true"></i>iCoin
+                        </h4>
+                    </div>
+                </a>
+                <div id="six" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <h5>You have <img src="<?=base_url('public/images/icoin.png');?>" width="18" style="margin-right:5px; margin-top:-5px;" /><?=$member->feedback;?></h5>
+                            <table id="feedback_table" class="orderTable" width="100%">
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("บันทึกการได้มา / ใช้","Acquisition/use record","บันทึกการได้มา / ใช้");}
+                                        else if($lang == 'th'){echo str_replace("บันทึกการได้มา / ใช้","บันทึกการได้มา / ใช้","บันทึกการได้มา / ใช้");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันที่มีผล","Effective date","วันที่มีผล");}
+                                        else if($lang == 'th'){echo str_replace("วันที่มีผล","วันที่มีผล","วันที่มีผล");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันที่หักเงิน","Deduction date","วันที่หักเงิน");}
+                                        else if($lang == 'th'){echo str_replace("วันที่หักเงิน","วันที่หักเงิน","วันที่หักเงิน");}
+                                        ?>
+                                    </td>
+                                    <td>Obtain<img src="<?=base_url('public/images/icoin.png');?>" /></td>
+                                </tr>
+                                <?php foreach($feedback as $item):?>
+                                <tr>
+                                    <td><?=$item['order_no'];?></td>
+                                    <td><?=$item['start_time'];?></td>
+                                    <td><?=$item['end_time'];?></td>
+                                    <td><img src="<?=base_url('public/images/icoin.png');?>" /><?=$item['gold'];?></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </table>
+                            <div class="col-md-12" style="margin:10px auto;">
+                                <input type="date" id="feedback_start" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <label style="margin:8px; float:left;">~</label>
+                                <input type="date" id="feedback_end" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <button class="btn btn-primary" style="margin-left:10px; float:left;" onclick="sch_feedback();">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query History","ประวัติการค้นหา");}
+                                    else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                                    ?>
+                                </button>
+                                <div class="clearfix"></div>
+                                <span class="alert-danger" style="font-size:12px;">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","*date range can only be entered within one month","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    else if($lang == 'th'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+        </div>
+        <!-- end of #bs-collapse  -->
+    </div>
+</div>
+<!-- end of container -->
+	</div>
+<div class="clearfix"></div>
+
+<!-- 訂單查詢 Modal -->
+<div id="orderModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">
+                Order Details
+                <?php
+                if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query","ประวัติการค้นหา");}
+                else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                ?>
+            </h4>
+        </header>
+        <div class="w3-container">
+            <table id="table_source1" class="orderTable" width="90%" align="center">
+            </table>
+            <table width="90%" align="center" style="background-color:#f9f9f9; text-align:right; border:1px solid #666;">
+                <tr>
+                    <td>
+                        <div class="col-md-12" style="margin:10px auto;">
+                            <p>
+                                <?php
+                                if($lang == 'en'){echo str_replace("จำนวนผลิตภัณฑ์ทั้งหมด","Total product amount","จำนวนผลิตภัณฑ์ทั้งหมด");}
+                                else if($lang == 'th'){echo str_replace("จำนวนผลิตภัณฑ์ทั้งหมด","จำนวนผลิตภัณฑ์ทั้งหมด","จำนวนผลิตภัณฑ์ทั้งหมด");}
+                                ?>
+                                <span style="margin-left:15px;" id="total"></span>
+                            </p>
+                            <p>
+                                <?php
+                                if($lang == 'en'){echo str_replace("ค่าบริการโลจิสติกส์","Logistics service fee","ค่าบริการโลจิสติกส์");}
+                                else if($lang == 'th'){echo str_replace("ค่าบริการโลจิสติกส์","ค่าบริการโลจิสติกส์","ค่าบริการโลจิสติกส์");}
+                                ?>
+                                <span style="margin-left:15px;" id="fare"></span>
+                            </p>
+                            <p>
+                                <?php
+                                if($lang == 'en'){echo str_replace("ส่วนลด","Discount","ส่วนลด");}
+                                else if($lang == 'th'){echo str_replace("ส่วนลด","ส่วนลด","ส่วนลด");}
+                                ?>
+                                <span style="margin-left:15px;" id="discount"></span>
+                            </p>
+                            <hr />
+                            <p style="font-weight:bold; font-size:18px">
+                                <?php
+                                if($lang == 'en'){echo str_replace("ยอดซื้อรวม","Total shopping amount","ยอดซื้อรวม");}
+                                else if($lang == 'th'){echo str_replace("ยอดซื้อรวม","ยอดซื้อรวม","ยอดซื้อรวม");}
+                                ?>
+                                <span style="margin-left:15px;" id="all_total"></span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <!--table width="90%" align="center" class="orderTable" style="text-align:left;">
+                <tr>
+                    <td>
+                        <?php
+                            if($lang == 'en'){echo str_replace("ส่งข้อมูล","Send information","ส่งข้อมูล");}
+                            else if($lang == 'th'){echo str_replace("ส่งข้อมูล","ส่งข้อมูล","ส่งข้อมูล");}
+                        ?>
+                    </td>
+                </tr>
+                <tr><td>
+                    <p>State Description:	Buyer cancels order<br />
+                    Recipients Chinese full name:	Zhang *<br />
+                    Default notification phone:	0911***123<br />
+                    Pick up store:	163512 Liugong Store, Keelung City, Keelung City, No. 22, No. 22, Gongjian Road, No. 1, No. 23, 1st Floor, Liugongmen City<br />
+                    Invoice number:	<br />
+                    Invoicing:	</p>
+                </td></tr>
+            </table>
+            <div class="clearfix"></div>
+            <p class="alert alert-danger" style="width:90%; display:block; margin:15px auto;">【Precautions】<br />
+            1. Please contact our customer service center if you have any order problems. We will reply you by mail as soon as possible within 1 to 2 days (excluding holidays). <br />
+            2. Check the order details (such as product content/delivery method, etc.) Please click order number for inquiries. <br />
+            3. In order to accelerate the processing speed for you, please read the related [after-sales service] method carefully before clicking on the return application.</p>
+            <div class="clearfix"></div-->
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 訂單查詢 Modal -->
+<!-- 訂單取消 Modal -->
+<div id="cancelModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4" style="width:250px !important;">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Order Canceling</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </header>
+        <div class="w3-container">
+            <div class="col-md-12" style="text-align:center;">
+                <p class="alert-link">Cancel this order ?</p>
+                <button class="btn btn-warning">yes</button>&nbsp;<button class="btn btn-default">no</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 訂單取消 Modal -->
+<!-- 訂單退貨 Modal -->
+<div id="returnModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4" style="width:300px !important;">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Return Order</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </header>
+        <div class="w3-container">
+            <div class="col-md-12" style="text-align:left;">
+                <h5>Return Number：12345</h5><br />
+                <h5>Order number：11286152</h5><br />
+                <h5>Reson：</h5><br />
+                <textarea class="form-control" rows="5" style="width:100%; resize : none;"></textarea>
+                <button class="btn btn-danger" style="margin:10px auto; display:block;">Submit</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 訂單退貨 Modal -->
+<!-- 退貨進度 Modal -->
+<div id="processModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Return Process</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </header>
+        <div class="w3-container">
+            <div class="col-md-12" style="text-align:center;">
+                <table class="orderTable" width="90%" align="center">
+                    <tr>
+                        <td>Date</td>
+                        <td>Time</td>
+                        <td>Places</td>
+                        <td>Status</td>
+                    </tr>
+                    <tr>
+                        <td>2018/03/16</td>
+                        <td>16:05</td>
+                        <td>Dispatching Center</td>
+                        <td>Pendding</td>
+                    </tr>
+                    <tr>
+                        <td>2018/03/16</td>
+                        <td>14:05</td>
+                        <td>IMODA</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 退貨進度 Modal -->
+<script type="text/javascript">
+    function order_detail(order_no) {
+        $.ajax({
+            url: "<?php echo site_url('en/order_detail'); ?>",
+            type: "POST",
+            dataType: "JSON",
+            cache: "false",
+            data: "order_no=" + order_no,
+            success: function (data) {
+                var txt = '<tr><td>No.</td>';
+                txt += '<td>Product number</td>';
+                txt += '<td>Name of product</td>';
+                txt += '<td>Color</td>';
+                txt += '<td>Specification</td>';
+                txt += '<td>Quantity</td>';
+                txt += '<td>Unit price</td>';
+                txt += '<td>Discount price</td></tr>';
+                for (var i = 0; i < data.length; i++) {
+                    txt += '<tr><td>' + data[i]['id'] + '</td>'
+                    txt += '<td>' + data[i]['id'] + '</td>';
+                    txt += '<td>' + data[i]['name'] + '</td>';
+                    txt += '<td>' + data[i]['color'] + '</td>';
+                    txt += '<td>' + data[i]['size'] + '</td>';
+                    txt += '<td>' + data[i]['num'] + '</td>';
+                    txt += '<td>' + data[i]['price'] + '</td>';
+                    txt += '<td>' + data[i]['total'] + '</td></tr>';
+                }
+                document.getElementById('table_source1').innerHTML = txt;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("body").append(xhr.status);
+                $("body").append(xhr.responseText);
+                alert(thrownError);
+            }
+        });
+
+        $.ajax({
+            url: "<?php echo site_url('/en/sch_order'); ?>",
+            type: "POST",
+            dataType: "JSON",
+            cache: "false",
+            data: "order_no=" + order_no,
+            success: function (data) {
+                var discount = parseInt(data.discount1) + parseInt(data.discount2) + parseInt(data.discount3);
+
+                document.getElementById('total').innerHTML = '฿ ' + data.total;
+                document.getElementById('fare').innerHTML = '+฿ ' + data.fare;
+                document.getElementById('discount').innerHTML = '-฿ ' + discount;
+                document.getElementById('all_total').innerHTML = '฿ ' + data.sum;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("body").append(xhr.status);
+                $("body").append(xhr.responseText);
+                alert(thrownError);
+            }
+        })
+    }
+</script>
+
+

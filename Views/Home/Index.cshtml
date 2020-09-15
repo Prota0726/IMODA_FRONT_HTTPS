@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="slider">
+    <div class="slider-wrap">
+        <div class="col-md-12 nopadding">
+            <div id="mogo-slider" class="carousel slide nopadding" data-ride="carousel" data-interval="3000">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner text-center" role="listbox">
+                    <?php foreach($banner as $item):?>
+                    <div class="item <?=$item['active'];?>">
+                        <div class="slider-content">
+                            <a href="<?=$item['url'];?>" target="<?=$item['action'];?>"><img class="bannerimg" src="<?=base_url('public/banner/'.$item['img']);?>" width="100%" /><div class="clearfix"></div></a>
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <?php foreach($banner as $key => $item):?>
+                    <li data-target="#mogo-slider" data-slide-to="<?=$key;?>" class="<?=$item['active'];?>">
+                        <div class="indicator-inner">
+                            <span class="number">0<?=$key+1;?></span>
+                        </div>
+                    </li>
+                    <?php endforeach;?>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of slider -->

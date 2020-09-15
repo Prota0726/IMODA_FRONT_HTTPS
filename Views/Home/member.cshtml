@@ -1,0 +1,663 @@
+﻿@model  IMODA_FRONT_HTTPS.ViewModels.MemberViewModels
+
+@{
+    ViewBag.Title = "member";
+}
+
+<div class="container member-center">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <h3 class="title">
+            Member Center
+        </h3><hr />
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <h4>
+                Member Level
+            </h4>
+            <table class="member_level">
+                <tr>
+                    <td rowspan="2"
+                        @{ var temp = "class= \"active\""; if (Session["level"].ToString() == "1") { @Html.Raw(temp)  } }>
+                        <br>
+                        <br />General<br />membership<br />
+
+
+                    </td>
+                    <td><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i><br /></td>
+                    <td rowspan="2"
+                        @{ if (Session["level"].ToString() == "2") { @Html.Raw(temp)  } }>
+                        <br>
+                        <br />VIP<br />membership<br />
+                    </td>
+                    <td><i class="fa fa-long-arrow-right fa-3x" aria-hidden="true"></i></td>
+                    <td rowspan="2" @{ if (Session["level"].ToString() == "3") { @Html.Raw(temp)  } }>
+                        <br>
+                        <br />VVIP<br />membership<br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h6>
+
+                            @{
+                                if (Session["level"].ToString() == "1")
+                                {
+                                    temp = "shopping more than ฿" + (Model.member_level_data[1].sum_ - Model.ordersum);
+                                    @Html.Raw(temp)
+                                }
+                            }
+                        </h6>
+                    </td>
+                    <td>
+                        <h6>
+
+                            @{
+                                if (Session["level"].ToString() == "1" || Session["level"].ToString() == "2")
+                                {
+                                    temp = "shopping more than ฿" + (Model.member_level_data[2].sum_ - Model.ordersum);
+                                    @Html.Raw(temp)
+                                }
+                            }
+                        </h6>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <div class="panel-group wrap" id="bs-collapse">
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#one">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Member Profile
+                        </h4>
+                    </div>
+                </a>
+                <div id="one" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form method="POST" action="member">
+                            <table class="accounttable" align="center">
+                                <tr>
+                                    <td>
+                                        Account
+                                    </td>
+                                    <td><input class="form-control" type="text" name="account" value="@Model.member_data[0].account" disabled="disabled" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td><input class="form-control" type="text" name="name" value="@Model.member_data[0].name" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Birthday
+                                    </td>
+                                    <td><input class="form-control" type="date" name="birthday" value="@Model.member_data[0].birthday.ToString("yyyy-MM-dd")" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Phone
+                                    </td>
+                                    <td><input class="form-control" type="phone" name="phone" value="@Model.member_data[0].phone" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Email
+                                    </td>
+                                    <td><input class="form-control" type="email" name="email" value="@Model.member_data[0].email" /></td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <button type="submit" class="btn btn-success" style="display:block; margin:auto;">
+                                Confirmation
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#two">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                            Edit Password
+                        </h4>
+                    </div>
+                </a>
+                <div id="two" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <form method="POST" action="member">
+                            <table class="accounttable" align="center">
+                                <tr>
+                                    <td>
+                                        Login password
+                                    </td>
+                                    <td><input name="old_password" class="form-control" type="password" pattern="[a-zA-Z0-9]{6,}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        New password
+                                    </td>
+                                    <td><input name="password" class="form-control" type="password" pattern="[a-z0-9]{6,12}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Confirm password
+                                    </td>
+                                    <td><input name="new_password" class="form-control" type="password" pattern="[a-z0-9]{6,12}" /></td>
+                                </tr>
+                            </table>
+                            <div class="clearfix"></div>
+                            <button type="submit" class="btn btn-success" style="display:block; margin:auto;">
+                                Confirmation
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#three" aria-expanded="true">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                            Nearly Three Month Account Profile
+                        </h4>
+                    </div>
+                </a>
+                <div id="three" class="panel-collapse collapse in" aria-expanded="true">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">
+                                    Waiting for shipping order
+                                    <br />
+                                    <a href="#">@Model.wait_shopping_count</a>
+                                </div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">
+                                    Shipping order
+                                    <br />
+                                    <a href="#">@Model.shopping_count</a>
+                                </div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">
+                                    Red envelope
+                                    <br />
+                                    <a href="#">
+                                        @{
+                                            temp = "0";
+                                            if (Model.member_data[0].discount_code != null)
+                                            {
+                                                temp = Model.member_data[0].discount_code.ToString();
+
+                                            }
+                                            @Html.Raw(temp)
+                                        }
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box">iCoin<br /><img src="~/public/images/icoin.png" width="20" style="margin-top:-8px;" /><a href="#">@Model.member_data[0].feedback.ToString()</a></div>
+                            </div>
+                            <div class="col-md-1-5 col-sm-4 historybox">
+                                <div class="box" data-toggle="modal" data-target="#onlineserver">
+                                    Online customer service
+                                    <br />
+                                    <img src="~/public/images/online-1.png" width="40" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#four">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-archive" aria-hidden="true"></i>
+                            Order Tracking
+                        </h4>
+                    </div>
+                </a>
+                <div id="four" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <table id="order_table" class="orderTable" width="100%">
+                                <tr>
+                                    <td>
+                                        Order date
+                                    </td>
+                                    <td>
+                                        Order number
+                                    </td>
+                                    <td>
+                                        Recipient
+                                    </td>
+                                    <td>
+                                        Amount
+
+                                    </td>
+                                    <td>
+                                        Picking package number
+                                    </td>
+                                    <!--td>
+            <?php
+                if($lang == 'en'){echo str_replace("สถานะ","State description","สถานะ");}
+                else if($lang == 'th'){echo str_replace("สถานะ","สถานะ","สถานะ");}
+            ?>
+        </td-->
+                                </tr>
+                                @foreach (var item in Model.order_data)
+                                {
+                                    <tr>
+                                        <td>@item.c_time</td>
+                                        <td><a href="#" onclick="order_detail(@item.order_no);" data-toggle="modal" data-target="#orderModal"> @item.order_no</a></td>
+                                        <td>@item.name_</td>
+                                        <td>@item.sum_</td>
+                                        <td><?=$item['trackno'];?></td>
+                                        <!--td><?=$item['ship_status'];?></td-->
+                                    </tr>
+                                    //@Html.Raw(temp)
+                                }
+
+
+                            </table>
+                            <!--------取消訂單、退貨申請、退貨進度btn------
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#returnModal">退貨申請</button><button class="btn btn-warning" data-toggle="modal" data-target="#cancelModal">取消訂單</button><button class="btn btn-info" data-toggle="modal" data-target="#processModal">退貨進度</button>
+                            <!-------------->
+
+                            <div class="col-md-12" style="margin:10px auto;">
+                                <input type="date" id="order_start" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <label style="margin:8px; float:left;">~</label>
+                                <input type="date" id="order_end" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <button class="btn btn-primary" style="margin-left:10px; float:left;" onclick="sch_order();">
+                                    Query History
+                                </button>
+                                <div class="clearfix"></div>
+                                <span class="alert-danger" style="font-size:12px;">
+                                    *date range can only be entered within one month
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#five">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            Red envelope
+                        </h4>
+                    </div>
+                </a>
+                <div id="five" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <table id="discount_code_table" class="orderTable" width="100%">
+                                <tr>
+                                    <td>
+                                        Project
+                                    </td>
+                                    <td>
+                                        Amount
+                                    </td>
+                                    <td>
+                                        Deduction
+                                    </td>
+                                    <td>
+                                        Activation date
+                                    </td>
+                                    <td>
+                                        Effective date
+                                    </td>
+                                    <td>
+                                        Status
+                                        Status
+                                    </td>
+                                </tr>
+                                <?php foreach($discount_code as $item):?>
+                                <tr>
+                                    <td><?=$item['name'];?></td>
+                                    <td><?=$item['amount'];?></td>
+                                    <td><?=$item['deduction'];?></td>
+                                    <td><?=$item['start_time'];?></td>
+                                    <td><?=$item['end_time'];?></td>
+                                    <td><?=$item['status'];?></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </table>
+                            <div class="col-md-12" style="margin:10px auto;">
+                                <input id="discount_code_start" type="date" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <label style="margin:8px; float:left;">~</label>
+                                <input id="discount_code_end" type="date" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <button type="button" class="btn btn-primary" style="margin-left:10px; float:left;" onclick="sch_discount_code();">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query History","ประวัติการค้นหา");}
+                                    else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                                    ?>
+                                </button>
+                                <div class="clearfix"></div>
+                                <span class="alert-danger" style="font-size:12px;">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","*date range can only be entered within one month","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    else if($lang == 'th'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+            <div class="panel">
+                <a data-toggle="collapse" data-parent="#bs-collapse" href="#six">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-diamond" aria-hidden="true"></i>iCoin
+                        </h4>
+                    </div>
+                </a>
+                <div id="six" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-md-12 nopadding">
+                            <h5>You have <img src="<?=base_url('public/images/icoin.png');?>" width="18" style="margin-right:5px; margin-top:-5px;" /><?=$member->feedback;?></h5>
+                            <table id="feedback_table" class="orderTable" width="100%">
+                                <tr>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("บันทึกการได้มา / ใช้","Acquisition/use record","บันทึกการได้มา / ใช้");}
+                                        else if($lang == 'th'){echo str_replace("บันทึกการได้มา / ใช้","บันทึกการได้มา / ใช้","บันทึกการได้มา / ใช้");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันที่มีผล","Effective date","วันที่มีผล");}
+                                        else if($lang == 'th'){echo str_replace("วันที่มีผล","วันที่มีผล","วันที่มีผล");}
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        if($lang == 'en'){echo str_replace("วันที่หักเงิน","Deduction date","วันที่หักเงิน");}
+                                        else if($lang == 'th'){echo str_replace("วันที่หักเงิน","วันที่หักเงิน","วันที่หักเงิน");}
+                                        ?>
+                                    </td>
+                                    <td>Obtain<img src="<?=base_url('public/images/icoin.png');?>" /></td>
+                                </tr>
+                                <?php foreach($feedback as $item):?>
+                                <tr>
+                                    <td><?=$item['order_no'];?></td>
+                                    <td><?=$item['start_time'];?></td>
+                                    <td><?=$item['end_time'];?></td>
+                                    <td><img src="<?=base_url('public/images/icoin.png');?>" /><?=$item['gold'];?></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </table>
+                            <div class="col-md-12" style="margin:10px auto;">
+                                <input type="date" id="feedback_start" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <label style="margin:8px; float:left;">~</label>
+                                <input type="date" id="feedback_end" class="form-control" style="width:140px; float:left;" min="<?php echo date('Y-m-d',strtotime(" -30 days"));?>" max="<?php echo date('Y-m-d');?>" />
+                                <button class="btn btn-primary" style="margin-left:10px; float:left;" onclick="sch_feedback();">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query History","ประวัติการค้นหา");}
+                                    else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                                    ?>
+                                </button>
+                                <div class="clearfix"></div>
+                                <span class="alert-danger" style="font-size:12px;">
+                                    <?php
+                                    if($lang == 'en'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","*date range can only be entered within one month","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    else if($lang == 'th'){echo str_replace("* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น","* สามารถป้อนช่วงวันที่ได้ภายในหนึ่งเดือนเท่านั้น");}
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of panel -->
+
+        </div>
+        <!-- end of #bs-collapse  -->
+    </div>
+</div>
+<!-- end of container -->
+	</div>
+<div class="clearfix"></div>
+
+<!-- 訂單查詢 Modal -->
+<div id="orderModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">
+                Order Details
+                <?php
+                if($lang == 'en'){echo str_replace("ประวัติการค้นหา","Query","ประวัติการค้นหา");}
+                else if($lang == 'th'){echo str_replace("ประวัติการค้นหา","ประวัติการค้นหา","ประวัติการค้นหา");}
+                ?>
+            </h4>
+        </header>
+        <div class="w3-container">
+            <table id="table_source1" class="orderTable" width="90%" align="center">
+            </table>
+            <table width="90%" align="center" style="background-color:#f9f9f9; text-align:right; border:1px solid #666;">
+                <tr>
+                    <td>
+                        <div class="col-md-12" style="margin:10px auto;">
+                            <p>
+                                <?php
+                                if($lang == 'en'){echo str_replace("จำนวนผลิตภัณฑ์ทั้งหมด","Total product amount","จำนวนผลิตภัณฑ์ทั้งหมด");}
+                                else if($lang == 'th'){echo str_replace("จำนวนผลิตภัณฑ์ทั้งหมด","จำนวนผลิตภัณฑ์ทั้งหมด","จำนวนผลิตภัณฑ์ทั้งหมด");}
+                                ?>
+                                <span style="margin-left:15px;" id="total"></span>
+                            </p>
+                            <p>
+                                <?php
+                                if($lang == 'en'){echo str_replace("ค่าบริการโลจิสติกส์","Logistics service fee","ค่าบริการโลจิสติกส์");}
+                                else if($lang == 'th'){echo str_replace("ค่าบริการโลจิสติกส์","ค่าบริการโลจิสติกส์","ค่าบริการโลจิสติกส์");}
+                                ?>
+                                <span style="margin-left:15px;" id="fare"></span>
+                            </p>
+                            <p>
+                                <?php
+                                if($lang == 'en'){echo str_replace("ส่วนลด","Discount","ส่วนลด");}
+                                else if($lang == 'th'){echo str_replace("ส่วนลด","ส่วนลด","ส่วนลด");}
+                                ?>
+                                <span style="margin-left:15px;" id="discount"></span>
+                            </p>
+                            <hr />
+                            <p style="font-weight:bold; font-size:18px">
+                                <?php
+                                if($lang == 'en'){echo str_replace("ยอดซื้อรวม","Total shopping amount","ยอดซื้อรวม");}
+                                else if($lang == 'th'){echo str_replace("ยอดซื้อรวม","ยอดซื้อรวม","ยอดซื้อรวม");}
+                                ?>
+                                <span style="margin-left:15px;" id="all_total"></span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <!--table width="90%" align="center" class="orderTable" style="text-align:left;">
+                <tr>
+                    <td>
+                        <?php
+                            if($lang == 'en'){echo str_replace("ส่งข้อมูล","Send information","ส่งข้อมูล");}
+                            else if($lang == 'th'){echo str_replace("ส่งข้อมูล","ส่งข้อมูล","ส่งข้อมูล");}
+                        ?>
+                    </td>
+                </tr>
+                <tr><td>
+                    <p>State Description:	Buyer cancels order<br />
+                    Recipients Chinese full name:	Zhang *<br />
+                    Default notification phone:	0911***123<br />
+                    Pick up store:	163512 Liugong Store, Keelung City, Keelung City, No. 22, No. 22, Gongjian Road, No. 1, No. 23, 1st Floor, Liugongmen City<br />
+                    Invoice number:	<br />
+                    Invoicing:	</p>
+                </td></tr>
+            </table>
+            <div class="clearfix"></div>
+            <p class="alert alert-danger" style="width:90%; display:block; margin:15px auto;">【Precautions】<br />
+            1. Please contact our customer service center if you have any order problems. We will reply you by mail as soon as possible within 1 to 2 days (excluding holidays). <br />
+            2. Check the order details (such as product content/delivery method, etc.) Please click order number for inquiries. <br />
+            3. In order to accelerate the processing speed for you, please read the related [after-sales service] method carefully before clicking on the return application.</p>
+            <div class="clearfix"></div-->
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 訂單查詢 Modal -->
+<!-- 訂單取消 Modal -->
+<div id="cancelModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4" style="width:250px !important;">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Order Canceling</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </header>
+        <div class="w3-container">
+            <div class="col-md-12" style="text-align:center;">
+                <p class="alert-link">Cancel this order ?</p>
+                <button class="btn btn-warning">yes</button>&nbsp;<button class="btn btn-default">no</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 訂單取消 Modal -->
+<!-- 訂單退貨 Modal -->
+<div id="returnModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4" style="width:300px !important;">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Return Order</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </header>
+        <div class="w3-container">
+            <div class="col-md-12" style="text-align:left;">
+                <h5>Return Number：12345</h5><br />
+                <h5>Order number：11286152</h5><br />
+                <h5>Reson：</h5><br />
+                <textarea class="form-control" rows="5" style="width:100%; resize : none;"></textarea>
+                <button class="btn btn-danger" style="margin:10px auto; display:block;">Submit</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 訂單退貨 Modal -->
+<!-- 退貨進度 Modal -->
+<div id="processModal" class="w3-modal" style="z-index:9999;">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal">
+            <h4 style="padding:8px; margin:0px; text-align:center; font-weight:bold;">Return Process</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </header>
+        <div class="w3-container">
+            <div class="col-md-12" style="text-align:center;">
+                <table class="orderTable" width="90%" align="center">
+                    <tr>
+                        <td>Date</td>
+                        <td>Time</td>
+                        <td>Places</td>
+                        <td>Status</td>
+                    </tr>
+                    <tr>
+                        <td>2018/03/16</td>
+                        <td>16:05</td>
+                        <td>Dispatching Center</td>
+                        <td>Pendding</td>
+                    </tr>
+                    <tr>
+                        <td>2018/03/16</td>
+                        <td>14:05</td>
+                        <td>IMODA</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!--footer class="w3-container w3-teal">
+          <p>Modal Footer</p>
+        </footer-->
+    </div>
+</div>
+<!-- 退貨進度 Modal -->
+<script type="text/javascript">
+    function order_detail(order_no) {
+        $.ajax({
+            url: "<?php echo site_url('en/order_detail'); ?>",
+            type: "POST",
+            dataType: "JSON",
+            cache: "false",
+            data: "order_no=" + order_no,
+            success: function (data) {
+                var txt = '<tr><td>No.</td>';
+                txt += '<td>Product number</td>';
+                txt += '<td>Name of product</td>';
+                txt += '<td>Color</td>';
+                txt += '<td>Specification</td>';
+                txt += '<td>Quantity</td>';
+                txt += '<td>Unit price</td>';
+                txt += '<td>Discount price</td></tr>';
+                for (var i = 0; i < data.length; i++) {
+                    txt += '<tr><td>' + data[i]['id'] + '</td>'
+                    txt += '<td>' + data[i]['id'] + '</td>';
+                    txt += '<td>' + data[i]['name'] + '</td>';
+                    txt += '<td>' + data[i]['color'] + '</td>';
+                    txt += '<td>' + data[i]['size'] + '</td>';
+                    txt += '<td>' + data[i]['num'] + '</td>';
+                    txt += '<td>' + data[i]['price'] + '</td>';
+                    txt += '<td>' + data[i]['total'] + '</td></tr>';
+                }
+                document.getElementById('table_source1').innerHTML = txt;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("body").append(xhr.status);
+                $("body").append(xhr.responseText);
+                alert(thrownError);
+            }
+        });
+
+        $.ajax({
+            url: "<?php echo site_url('/en/sch_order'); ?>",
+            type: "POST",
+            dataType: "JSON",
+            cache: "false",
+            data: "order_no=" + order_no,
+            success: function (data) {
+                var discount = parseInt(data.discount1) + parseInt(data.discount2) + parseInt(data.discount3);
+
+                document.getElementById('total').innerHTML = '฿ ' + data.total;
+                document.getElementById('fare').innerHTML = '+฿ ' + data.fare;
+                document.getElementById('discount').innerHTML = '-฿ ' + discount;
+                document.getElementById('all_total').innerHTML = '฿ ' + data.sum;
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("body").append(xhr.status);
+                $("body").append(xhr.responseText);
+                alert(thrownError);
+            }
+        })
+    }
+</script>
+
+
