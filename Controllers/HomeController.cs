@@ -23,6 +23,9 @@ namespace IMODA_FRONT_HTTPS.Controllers
         public ActionResult Index()
         {
             Session["language"] = "en";
+            ViewModels.IndexViewModel viewModel = new ViewModels.IndexViewModel();
+            var banner_set = db.banner.OrderBy(m => m.id).ToList();
+            viewModel.banner = banner_set;
             return View();
         }
 
